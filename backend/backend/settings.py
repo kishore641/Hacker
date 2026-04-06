@@ -33,14 +33,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Add this for static files!
 ]
 
 ROOT_URLCONF = 'backend.urls'
 
+# Path to the frontend production build
+FRONTEND_DIR = os.path.join(BASE_DIR, '..', 'frontend', 'dist')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.parent / 'frontend' / 'dist'],
+        'DIRS': [FRONTEND_DIR], # Tell Django where to look for index.html
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
