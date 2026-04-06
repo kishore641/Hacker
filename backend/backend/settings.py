@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-your-secret-key'
+SECRET_KEY = 'django-insecure-pdforganizer-2026'
 DEBUG = True 
 ALLOWED_HOSTS = ['*']
 
@@ -32,7 +32,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
-# Path to the frontend production build
+# Path to the React production build
 FRONTEND_DIR = os.path.join(BASE_DIR.parent, 'frontend', 'dist')
 
 TEMPLATES = [
@@ -66,12 +66,15 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'assets/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(FRONTEND_DIR, 'assets'),
+    os.path.join(FRONTEND_DIR), # Serving everything from dist as static
 ]
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Whitenoise configuration for React
+WHITENOISE_INDEX_FILE = True
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
